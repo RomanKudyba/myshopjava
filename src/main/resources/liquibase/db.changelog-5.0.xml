@@ -1,0 +1,81 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="5.0.0" author="roman.rzes">
+        <createTable tableName="buys">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="count" type="INT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="full_price" type="DECIMAL(10,5)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="provider_id" type="BIGINT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5.0.1" author="roman.rzes">
+        <createTable tableName="sells">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="count" type="INT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="full_price" type="DECIMAL(10,5)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="buyer_id" type="BIGINT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5.0.2" author="roman.rzes">
+        <addColumn catalogName="myshop"
+                   schemaName= "public"
+                   tableName="products" >
+            <column name="available"
+                    type="tinyint(1)"
+                    defaultValue="0">
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

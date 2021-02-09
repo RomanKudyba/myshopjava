@@ -1,0 +1,46 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+        <changeSet id="6.0.0" author="roman.rzes">
+            <addForeignKeyConstraint baseColumnNames="product_id"
+                                     baseTableName="buys"
+                                     constraintName="fk_buys_product"
+                                     onDelete="CASCADE"
+                                     onUpdate="RESTRICT"
+                                     referencedColumnNames="id"
+                                     referencedTableName="products"/>
+        </changeSet>
+
+        <changeSet id="6.0.1" author="roman.rzes">
+            <addForeignKeyConstraint baseColumnNames="provider_id"
+                                     baseTableName="buys"
+                                     constraintName="fk_buys_provider"
+                                     onDelete="CASCADE"
+                                     onUpdate="RESTRICT"
+                                     referencedColumnNames="id"
+                                     referencedTableName="providers"/>
+        </changeSet>
+
+        <changeSet id="6.0.2" author="roman.rzes">
+            <addForeignKeyConstraint baseColumnNames="product_id"
+                                     baseTableName="sells"
+                                     constraintName="fk_sells_product"
+                                     onDelete="CASCADE"
+                                     onUpdate="RESTRICT"
+                                     referencedColumnNames="id"
+                                     referencedTableName="products"/>
+        </changeSet>
+
+        <changeSet id="6.0.3" author="roman.rzes">
+            <addForeignKeyConstraint baseColumnNames="buyer_id"
+                                     baseTableName="sells"
+                                     constraintName="fk_sells_buyer"
+                                     onDelete="CASCADE"
+                                     onUpdate="RESTRICT"
+                                     referencedColumnNames="id"
+                                     referencedTableName="buyers"/>
+        </changeSet>
+
+</databaseChangeLog>

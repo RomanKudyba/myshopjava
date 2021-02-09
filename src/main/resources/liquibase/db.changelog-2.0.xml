@@ -1,0 +1,94 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="2.0.0" author="roman.rzes">
+        <createTable tableName="category">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2.0.1" author="roman.rzes">
+        <createTable tableName="products">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="price" type="DECIMAL(10,3)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert  catalogName="myshop"
+                 dbms="!h2, mysql"
+                 schemaName="public"
+                 tableName="users">
+            <column  name="username"  value="test"/>
+            <column  name="password"  value="$2a$04$m/fXDlVaEX/q.uDRkLKRQ.gph7UIavuz3EQE6Kij1avDXby7v2VCm"/>
+            <column  name="first_name"  value="test"/>
+            <column  name="email"  value="test"/>
+            <column  name="last_name"  value="test"/>
+            <column  name="created"  value="2021-02-04 18:45:17"/>
+            <column  name="updated"  value="2021-02-04 18:45:17"/>
+            <column  name="status"  value="ACTIVE"/>
+        </insert>
+
+        <insert  catalogName="myshop"
+                 dbms="!h2, mysql"
+                 schemaName="public"
+                 tableName="user_roles">
+            <column  name="user_id"  value="1"/>
+            <column  name="role_id"  value="1"/>
+        </insert>
+
+        <insert  catalogName="myshop"
+                 dbms="!h2, mysql"
+                 schemaName="public"
+                 tableName="user_roles">
+            <column  name="user_id"  value="1"/>
+            <column  name="role_id"  value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="2.0.2" author="roman.rzes">
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="products"
+                                 constraintName="fk_products_category"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
+    </changeSet>
+
+</databaseChangeLog>
