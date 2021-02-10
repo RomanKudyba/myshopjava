@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class Buyers extends BaseEntity{
 
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -28,4 +29,7 @@ public class Buyers extends BaseEntity{
 
     @Column(name = "age")
     private Integer age;
+
+//    @OneToMany(mappedBy="buyer",cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Sells> sell;
 }

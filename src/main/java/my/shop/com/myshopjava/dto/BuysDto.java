@@ -12,7 +12,8 @@ public class BuysDto extends DTO{
 
     @JsonProperty("full_price")
     private Double fullPrice;
-
+    //product_id
+    //@todo
     private Products product;
 
     private Providers provider;

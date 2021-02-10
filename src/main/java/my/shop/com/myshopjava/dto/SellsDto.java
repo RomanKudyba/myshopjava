@@ -18,4 +18,7 @@ public class SellsDto extends DTO{
     private Products product;
 
     private Buyers buyer;
+
+//    @JsonProperty("buyer_id")
+//    private Long buyerId;
 }

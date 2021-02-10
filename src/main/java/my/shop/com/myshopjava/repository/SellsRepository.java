@@ -12,20 +12,21 @@ import java.util.Date;
 public interface SellsRepository extends JpaRepository<Sells, Long> {
     ArrayList<Sells> findByProductId(Long productId);
 
+    //@todo
     @Query("" +
             "Select " +
             "products.name," +
-            "sells.buyer_id," +
+            "sells.buyer," +
             "count(*) as count " +
             "from " +
-            "sells " +
+            "Sells sells " +
             "join " +
-            "products " +
-            "on products.id = sells.product_id " +
+            "Products products " +
+            "on products.id = sells.product " +
             "where " +
             "sells.created >= ?1 AND sells.created <= ?2 " +
             "Group by " +
-            "products.name, sells.buyer_id"
+            "products.name, sells.buyer"
     )
-    Sells getBuysForPeriodByBuyers(Date sdate, Date edate);
+    Object getBuysForPeriodByBuyers(Date sdate, Date edate);
 }

@@ -16,9 +16,9 @@ public class ReportServiceImpl implements ReportService {
     @Autowired
     private SellsRepository sellsRepository;
 
-    public String getBuysWithBuyerByPerid(Map<String, Date> period) {
-        Sells buys = sellsRepository.getBuysForPeriodByBuyers(period.get("sdate"), period.get("edate"));
-        return "OK";
+    public Object getBuysWithBuyerByPerid(Map<String, Date> period) {
+        Object buys = sellsRepository.getBuysForPeriodByBuyers(period.get("sdate"), period.get("edate"));
+        return buys;
     }
 
 }

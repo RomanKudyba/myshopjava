@@ -1,5 +1,6 @@
 package my.shop.com.myshopjava.rest;
 
+import my.shop.com.myshopjava.model.Sells;
 import my.shop.com.myshopjava.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +22,7 @@ public class ReportRestControllerV1 {
     private ReportService reportService;
 
     @GetMapping("/get-buys-by-buyers")
-    public Map<String, Date> getBuysByBuyers(
+    public Object getBuysByBuyers(
             @RequestParam("sdate")
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date sdate,
             @RequestParam("edate")
@@ -30,7 +31,7 @@ public class ReportRestControllerV1 {
         Map<String, Date> period = new HashMap<>();
         period.put("sdate", sdate);
         period.put("edate", edate);
-        String result = reportService.getBuysWithBuyerByPerid(period);
-        return period;
+        Object result = reportService.getBuysWithBuyerByPerid(period);
+        return result;
     }
 }
