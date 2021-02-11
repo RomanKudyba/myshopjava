@@ -46,44 +46,23 @@ public class FindAvailableProductsTask extends ScheduledTasks{
         Map<Products, List<Buys>> buysByProduct = allBuys.stream().collect(
                 Collectors.groupingBy(Buys::getProduct));
 //@todo
-        List<Integer> integers = new ArrayList<>();
+
         allProducts.forEach(product -> {
-            Integer productSellsCount = 0;
+            List<Integer> sellsSum = new ArrayList<>();
+            List<Integer> buysSum = new ArrayList<>();
 //            sellsByProduct.entrySet().stream().filter(p -> p.getKey().getId().equals(product.getId()))
 //                    .map(Map.Entry::getValue).forEach(
 //                            q -> q.forEach(w -> w.getCount())
 //            );
 
             sellsByProduct.entrySet().stream().filter(p -> p.getKey().getId().equals(product.getId()))
-                    .map(Map.Entry::getValue).forEach(q -> q.forEach(w -> integers.add(w.getCount())));
-            Integer sum = integers.stream().collect(Collectors.summingInt(Integer::intValue));
-            System.out.println(sum);
-//                    .map(c ->
-//                    c.getValue().stream().map(l -> integers.add(l.getCount()))
-//
-//
-//            );
+                    .map(Map.Entry::getValue).forEach(q -> q.forEach(w -> sellsSum.add(w.getCount())));
+            Integer productSellsCount = sellsSum.stream().collect(Collectors.summingInt(Integer::intValue));
 
+            buysByProduct.entrySet().stream().filter(pair -> pair.getKey().getId().equals(product.getId()))
+                    .map(m -> m.getValue()).forEach(value -> value.forEach(v -> buysSum.add(v.getCount())));
+            Integer productBuysCount = buysSum.stream().collect(Collectors.summingInt(Integer::intValue));
 
-//            System.out.println(integers);
-
-
-            for (Map.Entry<Products, List<Sells>> pair : sellsByProduct.entrySet()) {
-                if (pair.getKey().getId().equals(product.getId())) {
-                    for (Sells value : pair.getValue()) {
-                        productSellsCount += value.getCount();
-                    }
-                }
-            }
-
-            Integer productBuysCount = 0;
-            for (Map.Entry<Products, List<Buys>> pair : buysByProduct.entrySet()) {
-                if (pair.getKey().getId().equals(product.getId())) {
-                    for (Buys value : pair.getValue()) {
-                        productBuysCount += value.getCount();
-                    }
-                }
-            }
             boolean availabe = false;
             if ((productBuysCount - productSellsCount) > 0){
                 availabe = true;
